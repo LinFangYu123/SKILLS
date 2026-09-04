@@ -10,15 +10,17 @@
 SKILLS/
 ├── README.md
 └── skills/
-    └── find-skills/       # 技能发现助手:帮你搜索并安装其他技能
+    ├── find-skills/       # 技能发现助手:帮你搜索并安装其他技能
+    └── content-summary/   # 文档/字幕/视频总结,自带提取脚本
         └── SKILL.md
 ```
 
 ## 技能列表
 
-| 技能 | 来源 | 说明 |
-| --- | --- | --- |
-| [find-skills](skills/find-skills/) | [vercel-labs/skills](https://github.com/vercel-labs/skills) | 当你问"有没有能做 X 的 skill"时,自动帮你搜索开放的技能生态并给出安装方式 |
+| 技能 | 说明 |
+| --- | --- |
+| [find-skills](skills/find-skills/) | 当你问"有没有能做 X 的 skill"时,自动帮你搜索开放的技能生态并给出安装方式 |
+| [content-summary](skills/content-summary/) | 文档与字幕总结:PDF/DOCX/MD + SRT/VTT/ASS/LRC/JSON 字幕 + YouTube/B站链接(字幕优先,无字幕拆帧视觉兜底) + 对话粘贴转录,自带零依赖清洗/拆帧脚本,产出带时间戳和转写修正表的结构化摘要 |
 
 ## 安装方式
 

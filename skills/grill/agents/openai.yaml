@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill"
+  short_description: "Sharpen a plan through interview; docs only on request"
+policy:
+  allow_implicit_invocation: false

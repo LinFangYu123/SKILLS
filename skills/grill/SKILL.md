@@ -1,6 +1,7 @@
 ---
 name: grill
 description: Relentlessly interview the user to sharpen a plan, decision, or design — mapped as a decision tree worked in rounds. Docs (CONTEXT.md glossary, ADRs) are produced ONLY when the user explicitly asks for documentation (生成文档/写ADR/记录决策). Use when the user wants to stress-test their thinking, refine a plan/design, or uses any "grill" trigger phrase (拷问我/grill me).
+disable-model-invocation: true
 version: "1.0.0"
 ---
 

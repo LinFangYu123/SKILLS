@@ -13,7 +13,8 @@ SKILLS/
     ├── find-skills/         # 技能发现助手:帮你搜索并安装其他技能
     ├── content-summary/     # 文档/字幕/视频总结,自带提取脚本
     ├── code-analysis-docs/  # 代码分析→技术文档,自带输出模板
-    └── grill/               # 连环拷问打磨方案,文档按需生成
+    ├── grill/               # 连环拷问打磨方案,文档按需生成
+    └── create-skill/        # 创建与打磨技能的元技能
         └── SKILL.md
 ```
 
@@ -25,6 +26,7 @@ SKILLS/
 | [content-summary](skills/content-summary/) | 文档与字幕总结:PDF/DOCX/MD + SRT/VTT/ASS/LRC/JSON 字幕 + YouTube/B站链接(字幕优先,无字幕拆帧视觉兜底) + 对话粘贴转录,自带零依赖清洗/拆帧脚本,产出带时间戳和转写修正表的结构化摘要 |
 | [code-analysis-docs](skills/code-analysis-docs/) | 代码分析输出技术文档:五阶段流程(侦察→架构深潜→质量评估→基建→成文),证据驱动、引用真实文件路径、置信度追踪,附架构报告/README/API 参考/ADR 产出模板 |
 | [grill](skills/grill/) | 连环拷问打磨方案/设计:设计树建模 + 分轮追问(每轮给推荐答案),事实自己查、决策问用户;默认不产出文档,仅在明确要求时才写词汇表(CONTEXT.md)与 ADR |
+| [create-skill](skills/create-skill/) | 创建与打磨技能的元技能:采集意图→起草 SKILL.md(frontmatter/openai.yaml/渐进式披露)→测试触发→迭代收尾,内置本仓库全部规范 |
 
 ## 安装方式
 

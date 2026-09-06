@@ -68,3 +68,51 @@ description: 一句话描述触发场景,越具体越好
 
 使用说明、步骤、脚本路径等。
 ```
+
+### 调用控制与 OpenAI 兼容层
+
+#### `disable-model-invocation: true`（SKILL.md frontmatter）
+
+默认情况下,agent 会读取所有技能的 `description`,对话中判断相关就**自动加载**
+（隐式触发）。如果技能不希望被自动触发,只能由用户显式调用（例如像 grill
+这种会接管整个对话节奏的技能）,在 frontmatter 加一行:
+
+```markdown
+---
+name: my-skill
+description: 一句话描述触发场景
+disable-model-invocation: true   ← 加这行,pif/Claude Code 等会禁止模型自动触发
+---
+```
+
+本仓库中的 [grill](skills/grill/) 就使用了该字段;其余技能均依赖自动触发,不加。
+
+#### `agents/openai.yaml`（Codex 兼容元数据）
+
+OpenAI 系平台（Codex CLI 等）不读 SKILL.md 的通用字段,需要自己的专属配置。
+建议每个技能都提供 `agents/openai.yaml`,为 Codex 提供界面显示与调用策略:
+
+```yaml
+# skills/my-skill/agents/openai.yaml
+interface:
+  display_name: "My Skill"                     # 界面上显示的名称
+  short_description: "One-line description"    # 一句话简介
+policy:
+  allow_implicit_invocation: false             # 仅当 SKILL.md 里写了
+                                               # disable-model-invocation: true 时才加,
+                                               # 与之呼应;允许自动触发的技能省略整个 policy 段
+```
+
+- 其他 agent（pi、Claude Code、OpenCode 等）读到 `agents/` 目录会直接忽略,不影响使用
+- 本仓库四个技能均已提供该文件,可作参考
+
+### 目录结构参考
+
+```
+skills/my-skill/
+├── SKILL.md              # 必需:通用规范(所有 agent 读取)
+├── agents/
+│   └── openai.yaml       # 推荐:Codex 专属元数据
+├── references/           # 可选:参考资料、模板
+└── scripts/              # 可选:配套脚本
+```

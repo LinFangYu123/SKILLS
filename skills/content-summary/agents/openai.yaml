@@ -1,0 +1,3 @@
+interface:
+  display_name: "Content Summary"
+  short_description: "Summarize docs, subtitles, and videos with timestamps"

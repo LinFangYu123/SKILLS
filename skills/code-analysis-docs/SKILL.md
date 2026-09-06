@@ -9,11 +9,6 @@ version: "1.0.0"
 对目标代码库做**证据驱动**的多阶段分析，产出引用真实文件路径、
 区分事实与推断的结构化技术文档。全程只读代码，只写文档本身。
 
-参考设计：donnfelker-plugin-marketplace@codebase-analyzer（多阶段流程与输出规则）、
-outfitter-dev/agents@codebase-recon(置信度追踪与证据分级)、
-jeffallan/claude-skills@code-documenter（文档示例须验证）、
-wshobson/agents@code-documentation（注释写 WHY 不写 WHAT、ADR 模板）。
-
 ## 何时使用
 
 - 用户给出项目路径，要求"分析一下这个项目""梳理架构""写技术文档"

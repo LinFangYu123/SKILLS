@@ -9,10 +9,6 @@ description: Summarize documents and subtitles — PDF/DOCX/MD/TXT files, SRT/VT
 （YouTube/B站：字幕优先，无字幕时拆帧视觉兜底）做结构化总结：先无损提取纯文本，
 再按统一模板产出摘要。
 
-参考设计：sickn33/agentic-awesome-skills@youtube-summarizer（视频→转录→结构化摘要流程）、
-hamsterider-m/bilibili-subtitle（BBDown 抽取、错误码表、父子技能 JSON 契约）、
-aidotnet/moyucode@bilibili-analyzer（拆帧视觉分析、图文严格对应、重组织不写流水账）。
-
 ## 何时使用
 
 - 用户给字幕文件 / 文档路径，要求"总结这篇""提取要点""讲了什么"

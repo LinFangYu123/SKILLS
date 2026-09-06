@@ -13,10 +13,6 @@ version: "1.0.0"
 [references/writing-guide.md](./references/writing-guide.md)：起草前读一遍；
 修改技能、或被要求解释某条写法的依据时重读。
 
-参考设计：anthropics/skills@skill-creator（渐进式披露、触发优化、
-测试迭代循环）、mattpocock/skills@writing-for-agents（上下文指针、
-双重负载、引导词、修剪纪律）。
-
 ---
 
 ## 第一步：采集意图
@@ -113,8 +109,7 @@ policy:
   也没买到，整句删除；环境（package.json、目录结构）能查到的不复述，
   只写 agent 查不到的约定和理由；一个含义只在权威处存在一次
 - 大参考文件（>300 行）开头加目录
-- 正文用中文，遵循本仓库现有风格；开头保留一行「参考设计：xxx」注明
-  借鉴来源
+- 正文用中文，遵循本仓库现有风格
 
 ## 第三步：测试
 

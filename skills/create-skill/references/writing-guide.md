@@ -4,9 +4,6 @@
 参考文件。核心洞察：**agent 每次运行走的是同一个流程，所以文档的目标
 是让流程可预测，而不是让产出千篇一律**。
 
-参考设计：mattpocock/skills@writing-for-agents（本文件是其理论的中文提炼，
-概念归属原作者）。
-
 ---
 
 ## 上下文指针（context pointer）

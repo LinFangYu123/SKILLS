@@ -11,9 +11,6 @@ version: "1.0.0"
 没有留下任何隐含假设。默认**只拷问、不产出文档**；仅当用户明确要求
 （如「生成文档」「写 ADR」「记录下来」）时，才进入文档模式。
 
-参考设计：mattpocock/skills@grilling（设计树与轮次追问）、
-mattpocock/skills@domain-modeling（词汇表与 ADR 纪律）。
-
 ---
 
 ## 核心流程：设计树 + 轮次追问

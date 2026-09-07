@@ -1,0 +1,3 @@
+interface:
+  display_name: "Code Review"
+  short_description: "Language-aware code review with persistent confirmed-issue ledger"

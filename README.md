@@ -14,7 +14,8 @@ SKILLS/
     ├── content-summary/     # 文档/字幕/视频总结,自带提取脚本
     ├── code-analysis-docs/  # 代码分析→技术文档,自带输出模板
     ├── grill/               # 连环拷问打磨方案,文档按需生成
-    └── create-skill/        # 创建与打磨技能的元技能
+    ├── create-skill/        # 创建与打磨技能的元技能
+    └── code-review/         # 按语言细分的代码审查,台账沉淀已确认问题
         └── SKILL.md
 ```
 
@@ -27,6 +28,7 @@ SKILLS/
 | [code-analysis-docs](skills/code-analysis-docs/) | 代码分析输出技术文档:五阶段流程(侦察→架构深潜→质量评估→基建→成文),证据驱动、引用真实文件路径、置信度追踪,附架构报告/README/API 参考/ADR 产出模板 |
 | [grill](skills/grill/) | 连环拷问打磨方案/设计:设计树建模 + 分轮追问(每轮给推荐答案),事实自己查、决策问用户;默认不产出文档,仅在明确要求时才写词汇表(CONTEXT.md)与 ADR |
 | [create-skill](skills/create-skill/) | 创建与打磨技能的元技能:采集意图→起草 SKILL.md(frontmatter/openai.yaml/渐进式披露)→测试触发→迭代收尾,内置本仓库全部规范 |
+| [code-review](skills/code-review/) | 按语言细分的代码审查:自动识别文件类型加载对应语言清单(Python/TS/Go/C-C++/Java/Rust/通用),可借助 ctags/joern 等代码图谱工具;经用户确认的问题写入持久台账并按模式合并去重,高频模式后续优先复查 |
 
 ## 安装方式
 
@@ -54,67 +56,4 @@ cp -r skills/find-skills ~/.pi/agent/skills/
 cp -r skills/find-skills ~/.claude/skills/
 ```
 
-## 添加新技能
 
-1. 在 `skills/` 下新建目录,目录名即技能名
-2. 编写 `SKILL.md`,必须包含 YAML frontmatter(`name` 与 `description`)
-3. 提交并推送,agent 启动时会自动发现
-
-```markdown
----
-name: my-skill
-description: 一句话描述触发场景,越具体越好
----
-
-# My Skill
-
-使用说明、步骤、脚本路径等。
-```
-
-### 调用控制与 OpenAI 兼容层
-
-#### `disable-model-invocation: true`（SKILL.md frontmatter）
-
-默认情况下,agent 会读取所有技能的 `description`,对话中判断相关就**自动加载**
-（隐式触发）。如果技能不希望被自动触发,只能由用户显式调用（例如像 grill
-这种会接管整个对话节奏的技能）,在 frontmatter 加一行:
-
-```markdown
----
-name: my-skill
-description: 一句话描述触发场景
-disable-model-invocation: true   ← 加这行,pif/Claude Code 等会禁止模型自动触发
----
-```
-
-本仓库中的 [grill](skills/grill/) 就使用了该字段;其余技能均依赖自动触发,不加。
-
-#### `agents/openai.yaml`（Codex 兼容元数据）
-
-OpenAI 系平台（Codex CLI 等）不读 SKILL.md 的通用字段,需要自己的专属配置。
-建议每个技能都提供 `agents/openai.yaml`,为 Codex 提供界面显示与调用策略:
-
-```yaml
-# skills/my-skill/agents/openai.yaml
-interface:
-  display_name: "My Skill"                     # 界面上显示的名称
-  short_description: "One-line description"    # 一句话简介
-policy:
-  allow_implicit_invocation: false             # 仅当 SKILL.md 里写了
-                                               # disable-model-invocation: true 时才加,
-                                               # 与之呼应;允许自动触发的技能省略整个 policy 段
-```
-
-- 其他 agent（pi、Claude Code、OpenCode 等）读到 `agents/` 目录会直接忽略,不影响使用
-- 本仓库四个技能均已提供该文件,可作参考
-
-### 目录结构参考
-
-```
-skills/my-skill/
-├── SKILL.md              # 必需:通用规范(所有 agent 读取)
-├── agents/
-│   └── openai.yaml       # 推荐:Codex 专属元数据
-├── references/           # 可选:参考资料、模板
-└── scripts/              # 可选:配套脚本
-```

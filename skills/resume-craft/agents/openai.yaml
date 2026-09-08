@@ -1,0 +1,5 @@
+interface:
+  display_name: "Resume Craft"
+  short_description: "JD-targeted resume tailoring with ATS checks and quantified bullets"
+policy:
+  allow_implicit_invocation: false

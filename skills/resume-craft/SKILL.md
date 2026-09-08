@@ -72,7 +72,10 @@ disable-model-invocation: true
 本机已验证的管线，直接复用：
 
 1. 写 HTML 源文件（内联 CSS，中文字体 `Noto Sans CJK SC`，A4 友好的 margin）
-2. `soffice --headless --convert-to pdf <file>.html` 生成 PDF
+2. 首选 `python3 -c "from weasyprint import HTML; HTML('<file>.html').write_pdf('<file>.pdf')"`——
+   真正的 CSS 引擎，中文渲染可靠；soffice 的 HTML 导入有已知怪癖（全局 `p` margin 规则会被
+   错误作用到列表段落，在换行位置凭空插入空段落，且位置随版面变化飘移），仅作 weasyprint
+   不可用时的兜底，用完必须逐页目视检查有无幽灵空行
 3. 用 `pdftotext -layout` 回读验证中文渲染无乱码、`pdfinfo` 确认页数符合 tech-structure.md 的页数规则
 4. 版本管理：主简历永远是 master 源文件；定制版按 `<姓名>_简历_<目标岗位>_<公司>.pdf` 命名，master 不被定制版覆盖
 

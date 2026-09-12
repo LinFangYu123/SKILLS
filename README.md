@@ -15,8 +15,9 @@ SKILLS/
     ├── code-analysis-docs/  # 代码分析→技术文档,自带输出模板
     ├── grill/               # 连环拷问打磨方案,文档按需生成
     ├── create-skill/        # 创建与打磨技能的元技能
-    ├── code-review/         # 按语言细分的代码审查,台账沉淀已确认问题
-    └── resume-craft/        # 简历打磨:JD 定制+ATS 检查+bullet 量化,显式调用
+    ├── code-review/         # 按语言细分的代码审查，台账沉淀已确认问题
+    ├── teach/               # 教学工作室：跨会话带你学一个主题，自带讲义脚手架
+    └── resume-craft/        # 简历打磨：JD 定制+ATS 检查+bullet 量化，显式调用
         └── SKILL.md
 ```
 
@@ -30,6 +31,7 @@ SKILLS/
 | [grill](skills/grill/) | 连环拷问打磨方案/设计:设计树建模 + 分轮追问(每轮给推荐答案),事实自己查、决策问用户;默认不产出文档,仅在明确要求时才写词汇表(CONTEXT.md)与 ADR |
 | [create-skill](skills/create-skill/) | 创建与打磨技能的元技能:采集意图→起草 SKILL.md(frontmatter/openai.yaml/渐进式披露)→测试触发→迭代收尾,内置本仓库全部规范 |
 | [code-review](skills/code-review/) | 按语言细分的代码审查:自动识别文件类型加载对应语言清单(Python/TS/Go/C-C++/Java/Rust/通用),可借助 ctags/joern 等代码图谱工具;经用户确认的问题写入持久台账并按模式合并去重,高频模式后续优先复查 |
+| [teach](skills/teach/) | 教学工作室(显式调用):把当前目录当学习工作区,跨会话维护使命(MISSION)、学习路径与里程碑(PROGRESS)、概念级掌握度(mastery)、可交互 HTML 讲义(lessons)与阶段复盘;融合上游 teach 的工作区模型 + tutor 的零提示测验与熟练度追踪 + Cursor teaching 的里程碑/复盘;自带零依赖脚手架,开箱即得排版好的样式与自测组件 |
 | [resume-craft](skills/resume-craft/) | 简历打磨(显式调用):以主简历为事实源,五阶段流程(素材盘点→JD 关键词匹配评分→定制决策→bullet 量化改写→ATS 检查),内置 X-Y-Z/STAR 量化框架与技术岗结构规范,产出 HTML→PDF(已验证中文管线)与面试用修改说明 |
 
 ## 安装方式

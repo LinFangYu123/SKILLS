@@ -1,0 +1,5 @@
+interface:
+  display_name: "Teach"
+  short_description: "把目录当教学工作室，跨会话带你学一个主题"
+policy:
+  allow_implicit_invocation: false

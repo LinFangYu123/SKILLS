@@ -1,6 +1,6 @@
 ---
 name: explain-clearly
-description: 把复杂概念、代码、报错、英文术语、别人的文档或设计讲到一次就懂：结论先行，类比按听众背景从对应概念池取（默认 C/C++03：dict↔手写查找表、名字绑定↔指针、None↔NULL、共享状态↔两个指针指向同一块 malloc），按「最小完整答案 → 类比 → 机制 → 对你的影响」展开并标注类比在哪失效。用户说「解释一下/这是什么意思/为什么/听不懂/讲简单点/太抽象了/这报错什么意思/XX 是啥/换个说法再讲一遍/讲给我的老板听/讲给前端同事听」，或说 ELI5、explain like、break this down、in simple terms、what does this mean、why does this happen 时使用。
+description: 把复杂概念、代码、报错、英文术语、别人的文档或设计讲到听众一次就懂：结论先行，类比按听众背景从对应概念池取（默认 C/C++03：dict↔手写查找表、名字绑定↔指针、None↔NULL、共享状态↔两个指针指向同一块 malloc），按「最小完整答案→类比→机制→对你的影响」展开并标注类比在哪失效。用户说「解释一下/这是什么意思/为什么/听不懂/讲简单点/太抽象了/这报错什么意思/XX 是啥/这块数学怎么理解/这个公式什么意思/这个指标怎么算的/这个设计为什么这么做/帮我读懂这篇文档/换个说法再讲一遍/给我老板讲一遍/给前端同事讲一遍」，或说 ELI5、explain like、break this down、in simple terms、what does this mean、why does this happen、help me understand 时使用。只在听众要**理解**某个东西时使用；要提炼要点、写摘要时交给 content-summary。
 version: "1.0.0"
 ---
 

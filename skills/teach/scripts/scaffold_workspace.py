@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""teach 工作区脚手架：建目录、落共享样式与测验组件、写 PROGRESS.md 骨架。
+"""teach 工作区脚手架：建目录、写 PROGRESS.md 骨架。
 
-零依赖，幂等：已存在的文件不动，除非 --force。
+零依赖，幂等：已存在的 PROGRESS.md 不动，除非 --force。
 
 用法:
     python3 scaffold_workspace.py --dir . --topic "分布式系统"
@@ -11,15 +11,10 @@
 """
 
 import argparse
-import shutil
 import sys
 from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-TEMPLATES = HERE / "templates"
-
-SUBDIRS = ["lessons", "reference", "learning-records", "mastery", "assets"]
-ASSETS = ["style.css", "quiz.js"]
+SUBDIRS = ["lessons", "reference", "learning-records", "mastery"]
 
 PROGRESS = {
     "zh": """# {topic} 学习进度
@@ -86,13 +81,10 @@ def main() -> int:
     ap.add_argument("--dir", default=".", help="工作区目录（默认当前目录）")
     ap.add_argument("--topic", required=True, help="主题名，写进 PROGRESS.md 的标题")
     ap.add_argument("--lang", choices=sorted(PROGRESS), default="zh", help="骨架文案语言（默认 zh）")
-    ap.add_argument("--force", action="store_true", help="覆盖已存在的 assets / PROGRESS.md")
+    ap.add_argument("--force", action="store_true", help="覆盖已存在的 PROGRESS.md")
     args = ap.parse_args()
 
     root = Path(args.dir).expanduser().resolve()
-    if not TEMPLATES.is_dir():
-        print(f"错误：找不到模板目录 {TEMPLATES}", file=sys.stderr)
-        return 1
     try:
         root.mkdir(parents=True, exist_ok=True)
     except OSError as e:
@@ -104,14 +96,6 @@ def main() -> int:
     for d in SUBDIRS:
         (root / d).mkdir(exist_ok=True)
         made.append(f"{d}/")
-
-    for name in ASSETS:
-        src, dst = TEMPLATES / name, root / "assets" / name
-        if dst.exists() and not args.force:
-            skipped.append(f"assets/{name}")
-            continue
-        shutil.copyfile(src, dst)
-        made.append(f"assets/{name}")
 
     progress = root / "PROGRESS.md"
     if progress.exists() and not args.force:

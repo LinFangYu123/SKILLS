@@ -1,6 +1,6 @@
 ---
 name: teach
-description: 把当前目录当教学工作室，跨多次会话带你学一个主题——维护使命(MISSION)、学习路径与里程碑、可交互 HTML 讲义、概念级掌握度追踪、阶段复盘。用户说"教我X""带我系统学X""继续上次那节""考考我""复盘一下我学得怎么样"，或说 "teach me X" / "start learning X" / "quiz me on X" 时使用。
+description: 把当前目录当教学工作室，跨多次会话带你学一个主题——维护使命(MISSION)、学习路径与里程碑、Markdown 讲义、概念级掌握度追踪、阶段复盘。用户说"教我X""带我系统学X""继续上次那节""考考我""复盘一下我学得怎么样"，或说 "teach me X" / "start learning X" / "quiz me on X" 时使用。
 version: "1.0.0"
 disable-model-invocation: true
 ---
@@ -35,11 +35,10 @@ disable-model-invocation: true
 | `MISSION.md` | 用户**为什么**学这个，成功的可观察样子 | 每次会话开头 | 使命变化时 |
 | `PROGRESS.md` | 里程碑＋可测检查点＋熟练度总览＋当前弱项＋下一节 | 每次会话开头 | 每次课后、每次复盘 |
 | `mastery/{主题域}.md` | 概念级：尝试次数/正确数/状态/错误笔记 | 出题前、复盘时 | 每次测验判分后 |
-| `lessons/NNNN-*.html` | 一节一课，自包含 HTML 讲义 | 重看时 | 授课分支 |
-| `reference/*.html` | 速查卡、术语表、公式/语法参考 | 写讲义时引用 | 概念被真正理解后 |
+| `lessons/NNNN-*.md` | 一节一课，自包含 Markdown 讲义 | 重看时 | 授课分支 |
+| `reference/*.md` | 速查卡、术语表、公式/语法参考 | 写讲义时引用 | 概念被真正理解后 |
 | `learning-records/NNNN-*.md` | 非显然的洞见、误解纠正、先验知识声明 | 算最近发展区时 | 证据出现时 |
 | `RESOURCES.md` | 高可信知识来源＋真实社区 | 写任何教学内容前 | 开工时建立，持续修剪 |
-| `assets/` | 跨讲义复用的样式与组件 | 写讲义前**必读** | 需要新组件时 |
 | `NOTES.md` | 用户的偏好与他人无关的工作备注 | 每次会话开头 | 用户表达偏好时 |
 
 `mastery/` 与 `learning-records/` 分工要守住，别互相抄：**mastery 记"这个概念的通过率状态"（驱动下次出什么题），learning-records 记"为什么这里会绊住、接下来意味着什么"（驱动下次教什么）**。
@@ -65,7 +64,7 @@ disable-model-invocation: true
    python3 scripts/scaffold_workspace.py --dir . --topic "<主题>"
    ```
 
-   脚本幂等，已存在的文件不动（`--force` 才覆盖）；它建齐目录、写 `PROGRESS.md` 骨架、把 `assets/style.css` 与 `assets/quiz.js` 落到工作区。文件格式与规则见 [references/formats.md](./references/formats.md)。
+   脚本幂等，已存在的文件不动（`--force` 才覆盖）；它建齐目录并写好 `PROGRESS.md` 骨架。文件格式与规则见 [references/formats.md](./references/formats.md)。
 2. **访谈，直到能写出一句具体的使命**。追问"为什么"：学完它，你的工作/生活里会发生什么具体变化？模糊的使命比没有使命更糟——后面每一节课都会失去准星。用户说不清就先问，别急着写文件。
 3. 写 `MISSION.md`。格式与规则见 [references/formats.md](./references/formats.md)。
 4. **基线评估**：出 6-8 道零提示题，覆盖主题的主要领域，当众判分。这一步不是考试，是给最近发展区定坐标。
@@ -79,9 +78,9 @@ disable-model-invocation: true
 ## 分支 2：授课（主循环）
 
 1. **宣布这一节学什么、以及它挂在哪个里程碑上**，让用户有机会改。一次只教一个紧密聚焦的东西——工作记忆很小。
-2. 先读 `RESOURCES.md` 里对应来源的研究材料，再读 `assets/` 看有哪些现成组件。教学内容以来源为准，不以你的记忆为准。
-3. 写一节讲义到 `lessons/`，编号递增。结构与视觉规范见 [references/lesson.md](./references/lesson.md)。讲义要能独立看懂：用户三个月后只翻这一个文件也应该能恢复理解。
-4. **打开给用户看**（`xdg-open` / `open` 之类），然后闭嘴等着。教学发生在讲义里，不在聊天里。
+2. 先读 `RESOURCES.md` 里对应来源的研究材料，再读 `reference/` 看有没有可复用的参考条目。教学内容以来源为准，不以你的记忆为准。
+3. 写一节讲义到 `lessons/`，编号递增的 Markdown 文件。结构与排版规范见 [references/lesson.md](./references/lesson.md)。讲义要能独立看懂：用户三个月后只翻这一个文件也应该能恢复理解。
+4. **打开给用户看**（用系统默认 Markdown 阅读器，`xdg-open` / `open` 之类），然后闭嘴等着。教学发生在讲义里，不在聊天里。
 5. 用户读完，出 **4 道零提示测验题**考这一节的核心概念，判分并解释错题。
 6. 更新 `mastery/{主题域}.md`（新概念、尝试次数、状态、错误笔记）→ 重算 `PROGRESS.md` 的熟练度总览与弱项 → 若出现洞见/误解纠正，写一条 `learning-records/`。
 7. 告诉用户下一节是什么，以及**唯一**最该做的一件事。
@@ -122,7 +121,8 @@ disable-model-invocation: true
 6. **状态文件有界增长**：`PROGRESS.md` 只放聚合数字和当前状态，永不追加会话日志；`mastery/` 随概念数增长，不随时间增长。任何文件开始变成日记，就修剪它。
 7. **不碰工作区之外的文件**。所有读写留在当前目录及其子目录内；用户给了外部路径，请他先拷进来。
 8. **文件名用英文**（`lessons/0001-...`），**内容用用户的语言**。`{主题域}` 目录名也保持英文短横线命名，避免路径在不同工具间炸掉。
-9. **术语表是压缩知识的记录，不是读来学习的字典**：用户真正理解了一个概念之后，才把它推进 `reference/glossary.html`，写 1-2 句"它是什么"，并列出该弃用的同义说法（`_别用_`）。此后所有讲义和记录都必须用术语表里的词。
+9. **术语表是压缩知识的记录，不是读来学习的字典**：用户真正理解了一个概念之后，才把它推进 `reference/glossary.md`，写 1-2 句"它是什么"，并列出该弃用的同义说法（`_别用_`）。此后所有讲义和记录都必须用术语表里的词。
+10. **讲义一律 Markdown**（`lessons/NNNN-*.md`），唯一的 HTML 例外是测验答案的 `<details>` 折叠块。不要生成 `.html` 文件，也不要引入外部 CSS / JS / 图表 CDN。
 
 ## 教法速查
 
